@@ -1,38 +1,113 @@
 .App {
+  font-family: sans-serif;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.container-fluid {
+  display: block;
+  background: radial-gradient(
+    circle at -8.9% 51.2%,
+    rgb(255, 124, 0) 0%,
+    rgb(255, 124, 0) 15.9%,
+    rgb(255, 163, 77) 15.9%,
+    rgb(255, 163, 77) 24.4%,
+    rgb(19, 30, 37) 24.5%,
+    rgb(19, 30, 37) 66%
+  );
+  color: #fff;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* ID */
+#wind,
+#humidity {
+  font-family: "Bree Serif", serif;
+  font-size: 22px;
 }
 
-.App-link {
-  color: #61dafb;
+#icon {
+  margin-top: -40px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Elements */
+
+p {
+  font-family: "Montserrat", sans-serif;
+}
+
+footer {
+  margin: 10px 35rem;
+  padding: 0.5rem 15px;
+  background-color: #131e25;
+  border: 5px ridge #ffa34d;
+  border-radius: 20px;
+  display: block;
+  font-family: "Montserrat", sans-serif;
+  text-align: center;
+  color: #ffff;
+}
+
+/* Classes */
+
+.icon {
+  font-size: 40px;
+  padding-bottom: 0.5em;
+}
+.city,
+.temp {
+  font-family: "Bree Serif", serif;
+  font-size: 54px;
+}
+
+.temp {
+  font-size: 84px;
+}
+
+.country {
+  font-family: "Bree Serif", serif;
+  font-size: 28px;
+}
+
+.celsius,
+.fahrenheit {
+  font-size: smaller;
+  font-family: "Bree Serif", serif;
+  border: none;
+  color: #ffa34d;
+}
+
+.celsius:hover,
+.fahrenheit:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.temp-parameter {
+  font-size: 54px;
+}
+.speed,
+.percent {
+  color: #ffa34d;
+}
+
+/* JS CSS */
+
+.temp-border {
+  color: #0b5ed7;
+}
+
+.max-temp,
+.min-temp {
+  font-family: "Bree Serif", serif;
+  font-size: large;
+}
+
+.max-temp:hover,
+.min-temp:hover {
+  color: #0b5ed7;
+  font-size: x-large;
 }
