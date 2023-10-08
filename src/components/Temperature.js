@@ -5,11 +5,11 @@ import "../App.css";
 export default function Temperature(props) {
   let [temperature, setTemperature] = useState(null);
 
-  const apiKey = "5da7b2dc058f07286fea39c4cee516a3";
-  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.city}&appid=${apiKey}&units=metric`;
+  const apiKey = "ae5350b6a304ff06o3a36487d5be8a4t";
+  const apiUrl = `https://api.shecodes.io/weather/v1/current?query=${props.city}&key=${apiKey}`;
 
   function showTemperature(response) {
-    setTemperature(response.data.main.temp);
+    setTemperature(response.data.temperature.current);
   }
 
   axios
