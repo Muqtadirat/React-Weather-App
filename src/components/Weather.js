@@ -13,17 +13,25 @@ export default function Weather(props) {
     const city = props.city;
     const countryApiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
 
-    axios.get(countryApiUrl).then((response) => {
-      setCountry(response.data.country);
-      setAtmosphere(response.data.condition.description);
+    axios
+      .get(countryApiUrl)
+      .then((response) => {
+        setCountry(response.data.country);
+        setAtmosphere(
+          response.data.condition.description.charAt(0).toUpperCase() +
+            response.data.condition.description.slice(1)
+        );
 
-      const apiTimeInMilliseconds = response.data.time * 1000;
-      const apiTime = new Date(apiTimeInMilliseconds);
-      const hour = apiTime.getHours().toString().padStart(2, "0");
-      const minutes = apiTime.getMinutes().toString().padStart(2, "0");
+        const apiTimeInMilliseconds = response.data.time * 1000;
+        const apiTime = new Date(apiTimeInMilliseconds);
+        const hour = apiTime.getHours().toString().padStart(2, "0");
+        const minutes = apiTime.getMinutes().toString().padStart(2, "0");
 
-      setTime(`${hour}:${minutes}`);
-    });
+        setTime(`${hour}:${minutes}`);
+      })
+      .catch((error) => {
+        console.error("Error fetching weather data:", error);
+      });
   }, [props.city]);
 
   return (
