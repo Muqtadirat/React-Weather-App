@@ -4,6 +4,8 @@ import "../App.css";
 
 export default function Weather(props) {
   const [country, setCountry] = useState("");
+  const [time, setTime] = useState("");
+  const [atmosphere, setAtmosphere] = useState("");
 
   useEffect(() => {
     // Api to retrieve country information
@@ -13,6 +15,14 @@ export default function Weather(props) {
 
     axios.get(countryApiUrl).then((response) => {
       setCountry(response.data.country);
+      setAtmosphere(response.data.condition.description);
+
+      const apiTimeInMilliseconds = response.data.time * 1000;
+      const apiTime = new Date(apiTimeInMilliseconds);
+      const hour = apiTime.getHours().toString().padStart(2, "0");
+      const minutes = apiTime.getMinutes().toString().padStart(2, "0");
+
+      setTime(`${hour}:${minutes}`);
     });
   }, [props.city]);
 
@@ -34,12 +44,12 @@ export default function Weather(props) {
                 <p className="day">Saturday</p>
               </div>
               <div className="col">
-                <p className="time">11:11</p>
+                <p className="time">{time}</p>
               </div>
             </div>
           </div>
           <div className="col fs-4">
-            <p id="atmosphere">Light rain</p>
+            <p id="atmosphere">{atmosphere}</p>
           </div>
         </div>
       </div>
