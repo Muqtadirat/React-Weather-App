@@ -4,10 +4,10 @@ import "../App.css";
 
 export default function Temperature(props) {
   let [temperature, setTemperature] = useState(null);
-  let [icon, setIcon] = useState("");
+  let [icon, setIcon] = useState(null);
 
   const apiKey = "ae5350b6a304ff06o3a36487d5be8a4t";
-  const apiUrl = `https://api.shecodes.io/weather/v1/current?query=${props.city}&key=${apiKey}`;
+  const apiUrl = `https://api.shecodes.io/weather/v1/current?query=${props.city}&key=${apiKey}&units=metric`;
 
   function handleResponse(response) {
     setTemperature(response.data.temperature.current);
