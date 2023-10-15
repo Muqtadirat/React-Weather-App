@@ -7,17 +7,17 @@ export default function Humidity(props) {
   let [wind, setWind] = useState(null);
 
   const handleData = (data) => {
-    setHumidity(data.temperature.humidity);
-    setWind(data.wind.speed);
+    setHumidity(data.current.humidity);
+    setWind(data.current.wind_mph);
   };
 
   return (
     <div className="Humidity">
       <ApiHandler
-        apiUrl={`https://api.shecodes.io/weather/v1/current?query=${props.city}&key=ae5350b6a304ff06o3a36487d5be8a4t&units=metric`}
+        apiUrl={`https://api.weatherapi.com/v1/current.json?key=a8854d0ab8f546e4bd5185259231510&q=${props.city}&units=celsius`}
         onDataFetched={handleData}
       />
-      <div className="row row-cols-2 fs-5">
+      <div className="row row-cols-md-2 fs-5">
         <div className="col">
           <p id="humidity">
             Humidity: <span className="humidity-value">{humidity}</span>

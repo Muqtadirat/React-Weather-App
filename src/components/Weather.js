@@ -24,13 +24,13 @@ export default function Weather(props) {
   const [atmosphere, setAtmosphere] = useState("");
 
   const handleData = (data) => {
-    setCountry(data.country);
+    setCountry(data.location.country);
     setAtmosphere(
-      data.condition.description.charAt(0).toUpperCase() +
-        data.condition.description.slice(1)
+      data.current.condition.text.charAt(0).toUpperCase() +
+        data.current.condition.text.slice(1)
     );
 
-    const apiTimeInMilliseconds = data.time * 1000;
+    const apiTimeInMilliseconds = data.location.localtime_epoch * 1000;
     const apiTime = new Date(apiTimeInMilliseconds);
     const hour = apiTime.getHours().toString().padStart(2, "0");
     const minutes = apiTime.getMinutes().toString().padStart(2, "0");
@@ -41,11 +41,11 @@ export default function Weather(props) {
   return (
     <div className="Weather">
       <ApiHandler
-        apiUrl={`https://api.shecodes.io/weather/v1/current?query=${props.city}&key=ae5350b6a304ff06o3a36487d5be8a4t`}
+        apiUrl={`https://api.weatherapi.com/v1/current.json?key=a8854d0ab8f546e4bd5185259231510&q=${props.city}&units=celsius`}
         onDataFetched={handleData}
       />
       <div className="col">
-        <div className="row row-cols-1 text-start">
+        <div className="row row-cols-md-1 text-start">
           <div className="col">
             <p className="city">
               {props.city.charAt(0).toUpperCase() + props.city.slice(1)},
@@ -55,7 +55,7 @@ export default function Weather(props) {
             <p className="country">{country}</p>
           </div>
           <div className="col">
-            <div className="row row-cols-2 fs-3">
+            <div className="row row-cols-md-2 fs-3">
               <div className="col">
                 <p className="day">{getWeekDay()}</p>
               </div>

@@ -4,53 +4,53 @@ import ApiHandler from "./ApiHandler";
 import "../App.css";
 
 export default function Temperature(props) {
-  let [temperature, setTemperature] = useState(null);
+  let [temperature, setTemperature] = useState(0);
   let [icon, setIcon] = useState(null);
 
-  function toCelsius(event) {
-    event.preventDefault();
-
-    const celsius = Math.round(((temperature - 32) * 5) / 9);
-    setTemperature(celsius);
+  function toCelsius() {
+    if (temperature !== null) {
+      const celsius = Math.round(((temperature - 32) * 5) / 9);
+      setTemperature(celsius);
+    }
   }
 
-  function toFahrenheit(event) {
-    event.preventDefault();
-
-    const fahrenheit = Math.round((temperature * 9) / 5 + 32);
-    setTemperature(fahrenheit);
+  function toFahrenheit() {
+    if (temperature !== null) {
+      const fahrenheit = Math.round((temperature * 9) / 5 + 32);
+      setTemperature(fahrenheit);
+    }
   }
 
   const handleData = (data) => {
-    if (data.temperature.current !== temperature) {
-      setTemperature(data.temperature.current);
-      setIcon(
-        `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${data.condition.icon}.png`
-      );
+    if (data.current.temp_c !== temperature && data.current.condition.icon) {
+      setTemperature(data.current.temp_c);
+      const iconCode = data.current.condition.icon.split("/").pop(); // Extract icon code from the URL
+      const iconUrl = `https://cdn.weatherapi.com/weather/64x64/night/${iconCode}`; // Construct the icon URL
+      setIcon(iconUrl);
     }
   };
 
   return (
     <div className="Temperature">
       <ApiHandler
-        apiUrl={`https://api.shecodes.io/weather/v1/current?query=${props.city}&key=ae5350b6a304ff06o3a36487d5be8a4t&units=metric`}
+        apiUrl={`https://api.weatherapi.com/v1/current.json?key=a8854d0ab8f546e4bd5185259231510&q=${props.city}&units=celsius`}
         onDataFetched={handleData}
       />
       <div className="col">
         <div className="col pt-4" id="temperature">
           <p className="mt-4 fs-1">
-            <img src={icon} alt="" id="icon" />
+            <img src={icon} alt="" id="icon" className="img-fluid" />
             <span className="temp" id="temperature-value">
               {Math.round(temperature)}
             </span>
             <sup className="temp-parameter">
-              <button type="button" className="celsius" onClick={toCelsius}>
+              <button type="button" className="celsius btn" onClick={toCelsius}>
                 °C
               </button>{" "}
               |
               <button
                 type="button"
-                className="fahrenheit"
+                className="fahrenheit btn"
                 onClick={toFahrenheit}
               >
                 °F
