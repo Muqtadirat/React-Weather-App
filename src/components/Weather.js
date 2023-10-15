@@ -3,6 +3,22 @@ import axios from "axios";
 import "../App.css";
 
 export default function Weather(props) {
+  const now = new Date();
+
+  function getWeekDay() {
+   const weekday = [
+     "Sunday",
+     "Monday",
+     "Tuesday",
+     "Wednesday",
+     "Thursday",
+     "Friday",
+     "Saturday",
+   ][now.getDay()];
+
+   return weekday;
+  }
+
   const [country, setCountry] = useState("");
   const [time, setTime] = useState("");
   const [atmosphere, setAtmosphere] = useState("");
@@ -40,7 +56,7 @@ export default function Weather(props) {
         <div className="row row-cols-1 text-start">
           <div className="col">
             <p className="city">
-              {props.city.charAt(0).toUpperCase() + props.city.slice(1)}
+              {props.city.charAt(0).toUpperCase() + props.city.slice(1)},
             </p>
           </div>
           <div className="col">
@@ -49,7 +65,7 @@ export default function Weather(props) {
           <div className="col">
             <div className="row row-cols-2 fs-3">
               <div className="col">
-                <p className="day">Saturday</p>
+                <p className="day">{getWeekDay()}</p>
               </div>
               <div className="col">
                 <p className="time">{time}</p>
