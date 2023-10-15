@@ -1,22 +1,22 @@
-import React, { useState} from "react";
-import ApiHandler from "./ApiHandler"
+import React, { useState } from "react";
+import ApiHandler from "./ApiHandler";
 import "../App.css";
 
 export default function Weather(props) {
   const now = new Date();
 
   function getWeekDay() {
-   const weekday = [
-     "Sunday",
-     "Monday",
-     "Tuesday",
-     "Wednesday",
-     "Thursday",
-     "Friday",
-     "Saturday",
-   ][now.getDay()];
+    const weekday = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ][now.getDay()];
 
-   return weekday;
+    return weekday;
   }
 
   const [country, setCountry] = useState("");
@@ -37,7 +37,6 @@ export default function Weather(props) {
 
     setTime(`${hour}:${minutes}`);
   };
-
 
   return (
     <div className="Weather">
