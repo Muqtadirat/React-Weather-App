@@ -40,7 +40,7 @@ p {
 }
 
 footer {
-  margin: 10px 35rem;
+  margin: 10px 5%;
   padding: 0.5rem 15px;
   background-color: #131e25;
   border: 5px ridge #ffa34d;
@@ -49,6 +49,11 @@ footer {
   font-family: "Montserrat", sans-serif;
   text-align: center;
   color: #ffff;
+}
+
+#icon {
+  width: 84px; 
+  height: 84px; 
 }
 
 /* Classes */
@@ -110,4 +115,21 @@ footer {
 .min-temp:hover {
   color: #0b5ed7;
   font-size: x-large;
+}
+
+/* Media queryfor larger screens */
+.container-fluid {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .row-cols-2 {
+    flex-direction: column; 
+  }
+
+   .temp {
+    font-size: 42px;
+  }
 }
