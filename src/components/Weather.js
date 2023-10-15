@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import ApiHandler from "./ApiHandler"
 import "../App.css";
 
 export default function Weather(props) {
@@ -23,35 +23,28 @@ export default function Weather(props) {
   const [time, setTime] = useState("");
   const [atmosphere, setAtmosphere] = useState("");
 
-  useEffect(() => {
-    // Api to retrieve country information
-    const apiKey = "ae5350b6a304ff06o3a36487d5be8a4t";
-    const city = props.city;
-    const countryApiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
+  const handleData = (data) => {
+    setCountry(data.country);
+    setAtmosphere(
+      data.condition.description.charAt(0).toUpperCase() +
+        data.condition.description.slice(1)
+    );
 
-    axios
-      .get(countryApiUrl)
-      .then((response) => {
-        setCountry(response.data.country);
-        setAtmosphere(
-          response.data.condition.description.charAt(0).toUpperCase() +
-            response.data.condition.description.slice(1)
-        );
+    const apiTimeInMilliseconds = data.time * 1000;
+    const apiTime = new Date(apiTimeInMilliseconds);
+    const hour = apiTime.getHours().toString().padStart(2, "0");
+    const minutes = apiTime.getMinutes().toString().padStart(2, "0");
 
-        const apiTimeInMilliseconds = response.data.time * 1000;
-        const apiTime = new Date(apiTimeInMilliseconds);
-        const hour = apiTime.getHours().toString().padStart(2, "0");
-        const minutes = apiTime.getMinutes().toString().padStart(2, "0");
+    setTime(`${hour}:${minutes}`);
+  };
 
-        setTime(`${hour}:${minutes}`);
-      })
-      .catch((error) => {
-        console.error("Error fetching weather data:", error);
-      });
-  }, [props.city]);
 
   return (
     <div className="Weather">
+      <ApiHandler
+        apiUrl={`https://api.shecodes.io/weather/v1/current?query=${props.city}&key=ae5350b6a304ff06o3a36487d5be8a4t`}
+        onDataFetched={handleData}
+      />
       <div className="col">
         <div className="row row-cols-1 text-start">
           <div className="col">
