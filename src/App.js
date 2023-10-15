@@ -21,7 +21,7 @@ function App() {
         <Weather city={city} />
         <div className="col">
           <Temperature city={city} />
-          <Humidity />
+          <Humidity city={city} />
           <Forecast />
         </div>
       </div>

@@ -1,28 +1,22 @@
 import React, { useEffect, useState } from "react";
 import "../App.css";
-import axios from "axios";
+import ApiHandler from "./ApiHandler";
 
 export default function Humidity(props) {
   let [humidity, setHumidity] = useState(null);
   let [wind, setWind] = useState(null);
 
-  useEffect(() => {
-    const apiKey = "ae5350b6a304ff06o3a36487d5be8a4t";
-    const apiUrl = `https://api.shecodes.io/weather/v1/current?query=${props.city}&key=${apiKey}&units=metric`;
-
-    axios.get(apiUrl).then(
-      (response) => {
-        setHumidity(response.data.temperature.humidity);
-        setWind(response.data.wind.speed);
-      },
-      (error) => {
-        console.error("Error fetching humidity data:", error);
-      }
-    );
-  }, );
+  const handleData = (data) => {
+    setHumidity(data.temperature.humidity);
+    setWind(data.wind.speed);
+  };
 
   return (
     <div className="Humidity">
+      <ApiHandler
+        apiUrl={`https://api.shecodes.io/weather/v1/current?query=${props.city}&key=ae5350b6a304ff06o3a36487d5be8a4t&units=metric`}
+        onDataFetched={handleData}
+      />
       <div className="row row-cols-2 fs-5">
         <div className="col">
           <p id="humidity">
