@@ -22,10 +22,12 @@ export default function Temperature(props) {
   }
 
   const handleData = (data) => {
-    setTemperature(data.temperature.current);
-    setIcon(
-      `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${data.condition.icon}.png`
-    );
+    if (data.temperature.current !== temperature) {
+      setTemperature(data.temperature.current);
+      setIcon(
+        `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${data.condition.icon}.png`
+      );
+    }
   };
 
   return (
